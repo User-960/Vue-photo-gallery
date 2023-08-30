@@ -6,10 +6,10 @@
     >
       <v-spacer></v-spacer>
       <v-btn outlined :class="'ml-3'">
-        <router-link to="/">Main</router-link>
+        <router-link to="/" :class='$style.navLink'>Main</router-link>
       </v-btn>
       <v-btn outlined class="ml-3">
-        <router-link to="/photos">Photos</router-link>
+        <router-link to="/photos" :class='$style.navLink'>Photos</router-link>
       </v-btn>
     </v-app-bar>
   </v-container>
@@ -19,11 +19,13 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name: 'NavBar',
-    components: {},
+    name: 'vNavBar',
+    components: {}
   })
 </script>
 
-<style lang="">
-
+<style lang="scss" module>
+  .navLink {
+    color: #fff !important;
+  }
 </style>

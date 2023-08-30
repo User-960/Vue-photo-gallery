@@ -1,8 +1,8 @@
 <template>
   <v-col cols="4">
-    <v-card :class="{ active: isActive }">
-      <v-card-title class="cardTitle">{{ photo.title }}</v-card-title>
-      <v-card-text  class="cardText">
+    <v-card :class="{ [$style.active]: isActive }">
+      <v-card-title :class="$style.cardTitle">{{ photo.title }}</v-card-title>
+      <v-card-text  :class="$style.cardText">
         <v-img :src='photo.url' width='200' height='200'/>
       </v-card-text>
     </v-card>
@@ -28,7 +28,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .cardTitle {
   align-items: flex-start;
   min-height: 150px;

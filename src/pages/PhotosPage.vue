@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import vPhoto from '@/components/screens/photo/v-Photo.vue'
+import vPhoto from '@/components/screens/photo/vPhoto.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
 import UsersService from '@/service/users-service'
 
