@@ -1,5 +1,7 @@
 <template >
   <v-container>
+    <vPhotoForm/>
+    
     <div 
       :style="{marginBottom: '30px', fontSize: '20px'}" 
       v-if="photos.length !== 0"
@@ -16,6 +18,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import vPhoto from '@/components/screens/photo/vPhoto.vue'
+import vPhotoForm from '@/components/screens/photo/vPhotoForm.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
 import UsersService from '@/service/users-service'
 
@@ -23,7 +26,8 @@ const photosData: IPhoto[] = []
 
 export default Vue.extend({
   components: {
-    vPhoto
+    vPhoto,
+    vPhotoForm
   },
   data: () => ({
     photos: photosData
