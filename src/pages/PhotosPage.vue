@@ -1,6 +1,13 @@
 <template >
   <v-container>
     <vPhoto v-for="photo in photos" :key="photo.id" :photo="photo"/>
+
+    <div 
+      :style="{marginTop: '30px', fontSize: '20px'}" 
+      v-if="photos.length !== 0"
+    >
+      Всего {{ photos.length }} фотографий
+    </div>
   </v-container>
 </template>
 

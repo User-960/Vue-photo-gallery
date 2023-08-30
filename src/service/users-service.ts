@@ -7,7 +7,7 @@ const PHOTOS = 'photos'
 class UsersService {
 	async getUsers(url: string) {
 		try {
-			const { data } = await axios.get<IPhoto[]>(`${url}/${PHOTOS}?_limit=30`)
+			const { data } = await axios.get<IPhoto[]>(`${url}/${PHOTOS}?_limit=20`)
 
 			return data
 		} catch (error) {
