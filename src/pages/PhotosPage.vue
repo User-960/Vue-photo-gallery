@@ -12,6 +12,8 @@
     <v-row>
       <vPhoto v-for="photo in photos" :key="photo.id" :photo="photo"/>
     </v-row>
+
+    <vPhotoDialog @openPhoto='openPhoto' :photo='currentPhoto' :isDialogVisible='isDialogVisible' />
   </v-container>
 </template>
 
@@ -19,18 +21,23 @@
 import Vue from 'vue'
 import vPhoto from '@/components/screens/photo/vPhoto.vue'
 import vPhotoForm from '@/components/screens/photo/vPhotoForm.vue'
+import vPhotoDialog from '@/components/screens/photo/vPhotoDialog.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
 import UsersService from '@/service/users-service'
 
-const photosData: IPhoto[] = []
+let photosData: IPhoto[] = []
+let currentPhotoData: IPhoto | null = null
 
 export default Vue.extend({
   components: {
     vPhoto,
-    vPhotoForm
+    vPhotoForm,
+    vPhotoDialog
   },
   data: () => ({
-    photos: photosData
+    photos: photosData,
+    currentPhoto: currentPhotoData,
+    isDialogVisible: false
   }),
   async mounted() {
     await UsersService.getUsers(this.$url)
@@ -43,6 +50,10 @@ export default Vue.extend({
     },
     addPhoto(photo: IPhoto) {
       this.photos.push(photo)
+    },
+    openPhoto(photo: IPhoto) {
+      this.currentPhoto = photo
+      this.isDialogVisible = true
     }
   }
 })

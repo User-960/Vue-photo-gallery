@@ -1,6 +1,6 @@
 <template>
   <v-col cols="4">
-    <v-card :class="{ [$style.active]: isActive }">
+    <v-card @click='openPhoto' :class="{ [$style.active]: isActive }">
       <v-card-title :class="$style.cardTitle">{{ photo.title }}</v-card-title>
       <v-card-text  :class="$style.cardText">
         <v-img :src='photo.url' width='200' height='200'/>
@@ -24,7 +24,12 @@ export default Vue.extend({
       type: Object as PropType<IPhoto>,
       required: true
     }
-  }
+  },
+  methods: {
+    openPhoto() {
+      this.$emit('openPhoto', this.photo || null)
+    }
+  },
 })
 </script>
 
