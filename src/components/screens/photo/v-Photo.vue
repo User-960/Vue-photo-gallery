@@ -6,16 +6,18 @@
 
 <script lang="ts">
 import { PropType }  from 'vue';
-import {IPhoto} from '@/interfaces/photo.interfaces'
+import Vue  from 'vue';
+import { IPhoto } from '@/interfaces/photo.interfaces'
 
-export default {
+export default Vue.extend({
+  name: 'vPhoto',
   props: {
     photo: {
       type: Object as PropType<IPhoto>,
       required: true
     }
   }
-}
+})
 </script>
 
 <style lang="scss">

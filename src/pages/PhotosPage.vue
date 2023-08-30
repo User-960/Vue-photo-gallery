@@ -5,23 +5,29 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from 'vue'
 import vPhoto from '@/components/screens/photo/v-Photo.vue'
-import {IPhoto} from '@/interfaces/photo.interfaces'
+import { IPhoto } from '@/interfaces/photo.interfaces'
+import UsersService from '@/service/users-service'
 
-const photosData: IPhoto[] = [
-  {id: 1, title: 'Photo 1'},
-  {id: 2, title: 'Photo 2'},
-  {id: 3, title: 'Photo 3'},
-  {id: 4, title: 'Photo 4'}
-]
+const photosData: IPhoto[] = []
 
 export default Vue.extend({
+  components: {
+    vPhoto
+  },
   data: () => ({
     photos: photosData
   }),
-  components: {
-    vPhoto
+  async mounted() {
+    await UsersService.getUsers(this.$url)
+    .then(res => this.photos = res)
+    .then(() => this.showNumber(this.photos))
+  },
+  methods: {
+    showNumber(array: IPhoto[]) {
+      console.log(array.length)
+    }
   }
 })
 </script>
