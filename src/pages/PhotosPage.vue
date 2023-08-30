@@ -1,7 +1,7 @@
 <template >
   <v-container>
-    <vPhotoForm/>
-    
+    <vPhotoForm @addPhoto='addPhoto'/>
+
     <div 
       :style="{marginBottom: '30px', fontSize: '20px'}" 
       v-if="photos.length !== 0"
@@ -40,6 +40,9 @@ export default Vue.extend({
   methods: {
     showNumber(array: IPhoto[]) {
       console.log(array.length)
+    },
+    addPhoto(photo: IPhoto) {
+      this.photos.push(photo)
     }
   }
 })
