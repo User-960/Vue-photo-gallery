@@ -4,7 +4,7 @@
    max-width="600"
   >
    <v-card>
-    <v-card-title>{{ photo?.title }}</v-card-title>
+    <v-card-title>{{ fullTitle }}</v-card-title>
     <v-card-text>
       <v-img :src='photo?.url' width='200' height='200'/>
     </v-card-text>
@@ -40,6 +40,11 @@ export default Vue.extend({
     value: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    fullTitle(): string {
+      return `Name of photo - ${this.photo?.title}`
     }
   }
 })
