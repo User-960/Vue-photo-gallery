@@ -13,7 +13,7 @@
       <vPhoto @openPhoto='openPhoto' v-for="photo in photos" :key="photo.id" :photo="photo"/>
     </v-row>
 
-    <vPhotoDialog :photo='currentPhoto' :isDialogVisible='isDialogVisible' />
+    <vPhotoDialog :photo='currentPhoto ? currentPhoto : {}' v-model='isDialogVisible' />
   </v-container>
 </template>
 
@@ -42,18 +42,16 @@ export default Vue.extend({
   async mounted() {
     await UsersService.getUsers(this.$url)
     .then(res => this.photos = res)
-    .then(() => this.showNumber(this.photos))
   },
   methods: {
-    showNumber(array: IPhoto[]) {
-      console.log(array.length)
-    },
     addPhoto(photo: IPhoto) {
       this.photos.push(photo)
     },
     openPhoto(photo: IPhoto) {
-      this.currentPhoto = photo
-      this.isDialogVisible = true
+      if (photo) {
+        this.currentPhoto = photo
+         this.isDialogVisible = true
+      }
     }
   }
 })

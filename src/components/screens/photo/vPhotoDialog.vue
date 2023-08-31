@@ -18,15 +18,28 @@ import Vue, { PropType } from 'vue'
 
 export default Vue.extend({
   name: 'vPhotoDialog',
-  data: () => ({}),
+  data: () => ({
+    isDialogVisible: false
+  }),
+  created() {
+    this.isDialogVisible = this.value
+  },
+  watch: {
+    value(newValue: boolean) {
+      this.isDialogVisible = newValue
+    },
+    isDialogVisible(newValue) {
+      this.$emit('input', newValue)
+    }
+  },
   props: {
     photo: {
       type: Object as PropType<IPhoto | null>,
       required: true
     },
-    isDialogVisible: {
+    value: {
       type: Boolean,
-      required: false
+      default: false
     }
   }
 })

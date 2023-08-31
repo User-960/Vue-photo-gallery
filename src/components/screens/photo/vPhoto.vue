@@ -27,7 +27,7 @@ export default Vue.extend({
   },
   methods: {
     openPhoto() {
-      this.$emit('openPhoto', this.photo || null)
+      this.$emit('openPhoto', this.photo)
     }
   },
 })
