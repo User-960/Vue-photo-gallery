@@ -17,15 +17,11 @@ export default {
 		}
 	},
 	getters: {
-		getAllPhotos(state: StateRepo) {
+		PHOTOS(state: StateRepo): IPhoto[] {
 			let newArray: IPhoto[] = []
-
-			for (let i = 0; i < state.photos.length; i++) {
-				if (state.photos.length === 10) {
-					newArray.push(state.photos[i])
-				}
+			for (let i = 0; i < 7; i++) {
+				newArray.push(state.photos[i])
 			}
-
 			return newArray
 		}
 	},

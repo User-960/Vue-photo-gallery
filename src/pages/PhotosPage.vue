@@ -1,17 +1,22 @@
 <template >
   <v-container>
-    <vPhotoForm v-if='photos.length < 21' @addPhoto='addPhoto'/>
+    <vPhotoForm v-if='$store.getters.PHOTOS.length < 21' @addPhoto='addPhoto'/>
     <div class='warningText' v-else>Вы не можете добавить больше фотографий</div>
 
     <div 
       :style="{marginBottom: '30px', fontSize: '20px'}" 
       v-if="photos.length !== 0"
     >
-      Всего {{ photos.length }} фотографий
+      Всего {{ $store.getters.PHOTOS.length }} фотографий
     </div>
 
     <v-row>
-      <vPhoto @openPhoto='openPhoto' v-for="photo in photos" :key="photo.id" :photo="photo"/>
+      <vPhoto 
+        @openPhoto='openPhoto' 
+        v-for="photo in $store.getters.PHOTOS" 
+        :key="photo.id" 
+        :photo="photo"
+        />
     </v-row>
 
     <vPhotoDialog :photo='currentPhoto ? currentPhoto : {}' v-model='isDialogVisible' />
@@ -24,7 +29,6 @@ import vPhoto from '@/components/screens/photo/vPhoto.vue'
 import vPhotoForm from '@/components/screens/photo/vPhotoForm.vue'
 import vPhotoDialog from '@/components/screens/photo/vPhotoDialog.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
-import UsersService from '@/service/users-service'
 
 let photosData: IPhoto[] = []
 let currentPhotoData: IPhoto | null = null
@@ -40,9 +44,8 @@ export default Vue.extend({
     currentPhoto: currentPhotoData,
     isDialogVisible: false
   }),
-  async mounted() {
-    await UsersService.getUsers(this.$url)
-    .then(res => this.photos = res)
+  mounted() {
+    this.$store.dispatch('GET_PHOTOS_FROM_API')
   },
   methods: {
     addPhoto(photo: IPhoto) {
@@ -51,7 +54,7 @@ export default Vue.extend({
     openPhoto(photo: IPhoto) {
       if (photo) {
         this.currentPhoto = photo
-         this.isDialogVisible = true
+        this.isDialogVisible = true
       }
     }
   }
