@@ -1,6 +1,6 @@
 <template>
   <v-col cols="4">
-    <v-card @click='openPhoto' :class="{ [$style.active]: isActive }">
+    <v-card @click.left='openPhoto' :class="{ [$style.active]: isActive }">
       <v-card-title :class="$style.cardTitle">{{ photo.title }}</v-card-title>
       <v-card-text  :class="$style.cardText">
         <v-img :src='photo.url' width='200' height='200'/>

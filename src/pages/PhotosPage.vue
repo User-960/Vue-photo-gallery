@@ -1,6 +1,7 @@
 <template >
   <v-container>
-    <vPhotoForm @addPhoto='addPhoto'/>
+    <vPhotoForm v-if='photos.length < 21' @addPhoto='addPhoto'/>
+    <div class='warningText' v-else>Вы не можете добавить больше фотографий</div>
 
     <div 
       :style="{marginBottom: '30px', fontSize: '20px'}" 
@@ -58,5 +59,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-  
+  .warningText {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
 </style>
