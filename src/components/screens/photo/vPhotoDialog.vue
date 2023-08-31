@@ -1,6 +1,6 @@
 <template >
   <v-dialog
-  v-model='isDialogVisible'
+   v-model='isDialogVisible'
    max-width="600"
   >
    <v-card>

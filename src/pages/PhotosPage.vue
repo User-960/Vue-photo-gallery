@@ -10,10 +10,10 @@
     </div>
 
     <v-row>
-      <vPhoto v-for="photo in photos" :key="photo.id" :photo="photo"/>
+      <vPhoto @openPhoto='openPhoto' v-for="photo in photos" :key="photo.id" :photo="photo"/>
     </v-row>
 
-    <vPhotoDialog @openPhoto='openPhoto' :photo='currentPhoto' :isDialogVisible='isDialogVisible' />
+    <vPhotoDialog :photo='currentPhoto' :isDialogVisible='isDialogVisible' />
   </v-container>
 </template>
 
