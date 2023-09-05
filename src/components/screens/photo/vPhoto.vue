@@ -14,6 +14,7 @@ import { PropType }  from 'vue';
 import Vue  from 'vue';
 import { IPhoto } from '@/interfaces/photo.interfaces'
 import { EPhotoMutation } from '@/store/modules/photo/mutations'
+import { mapMutations } from 'vuex'
 
 export default Vue.extend({
   name: 'vPhoto',
@@ -27,11 +28,12 @@ export default Vue.extend({
     }
   },
   methods: {
+    ...mapMutations([EPhotoMutation.SET_CURRENT_PHOTO, EPhotoMutation.SHOW_DIALOG]),
     openPhoto() {
-      this.$store.commit(EPhotoMutation.SET_CURRENT_PHOTO, this.photo)
-      this.$store.commit(EPhotoMutation.SHOW_DIALOG)
+      this.SET_CURRENT_PHOTO(this.photo)
+      this.SHOW_DIALOG()
     }
-  },
+  }
 })
 </script>
 

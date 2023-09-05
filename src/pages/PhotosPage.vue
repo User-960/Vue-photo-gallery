@@ -34,8 +34,7 @@ import vPhotoForm from '@/components/screens/photo/vPhotoForm.vue'
 import vPhotoDialog from '@/components/screens/photo/vPhotoDialog.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
 import { EPhotoActions } from '@/store/modules/photo/actions'
-
-let currentPhotoData: IPhoto | null = null
+import { mapActions } from 'vuex'
 
 export default Vue.extend({
   name: 'PhotosPage',
@@ -44,19 +43,17 @@ export default Vue.extend({
     vPhotoForm,
     vPhotoDialog
   },
-  data: () => ({
-    // currentPhoto: currentPhotoData,
-    // isDialogVisible: false
-  }),
+  data: () => ({}),
   computed: {
     photosData(): IPhoto[] {
       return this.$store.getters.GET_PHOTOS
     }
   },
   mounted() {
-    this.$store.dispatch(EPhotoActions.GET_PHOTOS_FROM_API)
+    this.GET_PHOTOS_FROM_API()
   },
   methods: {
+    ...mapActions([EPhotoActions.GET_PHOTOS_FROM_API]),
     addPhoto(photo: IPhoto) {
       this.$store.dispatch(EPhotoActions.ADD_NEW_PHOTO, photo)
     }
