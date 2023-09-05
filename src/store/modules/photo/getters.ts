@@ -10,5 +10,7 @@ export const getters: GetterTree<PhotosState, RootState> = {
 			newArray.push(state.photos[i])
 		}
 		return newArray
-	}
+	},
+	GET_DIALOG_VISIBLE: state => state.isDialogVisible,
+	GET_CURRENT_PHOTO: state => state.currentPhoto
 }

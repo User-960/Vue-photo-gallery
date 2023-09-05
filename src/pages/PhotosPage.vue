@@ -16,7 +16,6 @@
 
     <v-row v-if='$store.getters.GET_PHOTOS.length > 0'>
       <vPhoto
-        @openPhoto='openPhoto' 
         v-for='photo in photosData'
         :key='photo.id' 
         :photo='photo'
@@ -24,7 +23,7 @@
     </v-row>
     <div class='warningText' v-else>Фотографий нет</div>
 
-    <vPhotoDialog :photo='currentPhoto ? currentPhoto : {}' v-model='isDialogVisible' />
+    <vPhotoDialog />
   </v-container>
 </template>
 
@@ -46,8 +45,8 @@ export default Vue.extend({
     vPhotoDialog
   },
   data: () => ({
-    currentPhoto: currentPhotoData,
-    isDialogVisible: false
+    // currentPhoto: currentPhotoData,
+    // isDialogVisible: false
   }),
   computed: {
     photosData(): IPhoto[] {
@@ -60,12 +59,6 @@ export default Vue.extend({
   methods: {
     addPhoto(photo: IPhoto) {
       this.$store.dispatch(EPhotoActions.ADD_NEW_PHOTO, photo)
-    },
-    openPhoto(photo: IPhoto) {
-      if (photo) {
-        this.currentPhoto = photo
-        this.isDialogVisible = true
-      }
     }
   }
 })

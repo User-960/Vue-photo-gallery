@@ -8,7 +8,9 @@ import { RootState } from '@/interfaces/photo.interfaces'
 
 const state: PhotosState = {
 	photos: [],
-	photosEmptyText: ''
+	photosEmptyText: '',
+	isDialogVisible: false,
+	currentPhoto: {}
 }
 
 export const photoModule: Module<PhotosState, RootState> = {
