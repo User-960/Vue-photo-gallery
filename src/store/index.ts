@@ -1,12 +1,18 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { StoreOptions } from 'vuex'
 
-import photoModule from '@/store/modules/photoModule'
+import { RootState } from '@/interfaces/photo.interfaces'
+import { photoModule } from '@/store/modules/photo/photoModule'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store: StoreOptions<RootState> = {
+	state: {
+		globalTitle: 'Photo Gallery'
+	},
 	modules: {
 		photoModule
 	}
-})
+}
+
+export default new Vuex.Store<RootState>(store)

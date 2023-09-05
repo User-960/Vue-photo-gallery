@@ -1,23 +1,28 @@
 <template >
   <v-container>
-    <vPhotoForm v-if='$store.getters.PHOTOS.length < 21' @addPhoto='addPhoto'/>
-    <div class='warningText' v-else>Вы не можете добавить больше фотографий</div>
+    <h2>
+      {{ $store.state.globalTitle }}
+    </h2>
+
+    <vPhotoForm v-if='photosData.length < 21' @addPhoto='addPhoto'/>
+    <div class='warningText' v-else>You cannot add more photos</div>
 
     <div 
       :style="{marginBottom: '30px', fontSize: '20px'}" 
-      v-if="photos.length !== 0"
+      v-if="photosData.length > 0"
     >
-      Всего {{ $store.getters.PHOTOS.length }} фотографий
+      Total {{ photosData.length }} photos
     </div>
 
-    <v-row>
-      <vPhoto 
+    <v-row v-if='$store.getters.GET_PHOTOS.length > 0'>
+      <vPhoto
         @openPhoto='openPhoto' 
-        v-for="photo in $store.getters.PHOTOS" 
-        :key="photo.id" 
-        :photo="photo"
+        v-for='photo in photosData'
+        :key='photo.id' 
+        :photo='photo'
         />
     </v-row>
+    <div class='warningText' v-else>Фотографий нет</div>
 
     <vPhotoDialog :photo='currentPhoto ? currentPhoto : {}' v-model='isDialogVisible' />
   </v-container>
@@ -29,27 +34,32 @@ import vPhoto from '@/components/screens/photo/vPhoto.vue'
 import vPhotoForm from '@/components/screens/photo/vPhotoForm.vue'
 import vPhotoDialog from '@/components/screens/photo/vPhotoDialog.vue'
 import { IPhoto } from '@/interfaces/photo.interfaces'
+import { EPhotoActions } from '@/store/modules/photo/actions'
 
-let photosData: IPhoto[] = []
 let currentPhotoData: IPhoto | null = null
 
 export default Vue.extend({
+  name: 'PhotosPage',
   components: {
     vPhoto,
     vPhotoForm,
     vPhotoDialog
   },
   data: () => ({
-    photos: photosData,
     currentPhoto: currentPhotoData,
     isDialogVisible: false
   }),
+  computed: {
+    photosData(): IPhoto[] {
+      return this.$store.getters.GET_PHOTOS
+    }
+  },
   mounted() {
-    this.$store.dispatch('GET_PHOTOS_FROM_API')
+    this.$store.dispatch(EPhotoActions.GET_PHOTOS_FROM_API)
   },
   methods: {
     addPhoto(photo: IPhoto) {
-      this.photos.push(photo)
+      this.$store.dispatch(EPhotoActions.ADD_NEW_PHOTO, photo)
     },
     openPhoto(photo: IPhoto) {
       if (photo) {

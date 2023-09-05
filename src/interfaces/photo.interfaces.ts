@@ -5,3 +5,7 @@ export interface IPhoto {
 	title: string
 	url: string | ArrayBuffer | null
 }
+
+export interface RootState {
+	globalTitle: string
+}
