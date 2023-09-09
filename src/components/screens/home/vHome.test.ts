@@ -1,11 +1,19 @@
-import { render } from '@testing-library/vue'
+import { render, screen } from '@testing-library/vue'
 
 import vHome from './vHome.vue'
 
 describe('test vHome component', () => {
 	it('render Component', () => {
-		const { debug } = render(vHome)
+		// given / arrange
+		const titlePage: string = 'Home Page'
+		const options = {
+			props: { titlePage }
+		}
 
-		debug()
+		// when / act
+		render(vHome, options)
+
+		// then / assert
+		screen.getByText('Home Page')
 	})
 })
