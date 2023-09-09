@@ -9,7 +9,12 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'vHome',
-  props: ['titlePage']
+  props: {
+    titlePage: {
+      type: String,
+      required: true
+    }
+  }
 })
 </script>
 
