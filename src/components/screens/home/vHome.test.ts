@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/vue'
 import vHome from './vHome.vue'
 
 describe('test vHome component', () => {
-	it('render Component', () => {
+	it('render component with title', () => {
 		// given / arrange
 		const titlePage: string = 'Home Page'
 		const options = {
