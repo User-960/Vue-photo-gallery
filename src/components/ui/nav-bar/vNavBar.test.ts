@@ -24,6 +24,5 @@ describe('test vNavBar component', () => {
 		expect(screen.getByTestId('logo').getAttribute('class')).toBe(
 			defaultClasses
 		)
-		screen.debug()
 	})
 })
